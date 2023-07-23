@@ -3,12 +3,10 @@ from Pokemon import Pokemon
 class Pokedex:
 
     def __init__(self) -> None:
+        # Instancia de la clase de Pokemon
         self.poke = Pokemon()
 
-    def selectPokemon(slef):
-        pokemonId = int(input("Ingrese el número de Pókemon: "))
-        return pokemonId
-
+    # Obtener pokemon especifico
     def getPokemon(self,pokemonId: int):
         pokemon = self.poke.getPokemonInfo(pokemonId)
         return pokemon

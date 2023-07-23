@@ -6,16 +6,7 @@ class Pokemon:
     def __init__(self) -> None:
         pass
 
-    """
-    def getPokemonList(self):
-        url = "https://pokeapi.co/api/v2/pokemon/?limit=50"
-        response = requests.get(url)
-        raw_data = response.json()
-        data = raw_data["results"]
-        for pokemon in data:
-            print(pokemon["name"])
-    """
-
+    # Obtener informacón de un Pókemon en especifico, POKEAPI
     def getPokemonInfo(self,pokemonId: int):
         base_url = "https://pokeapi.co/api/v2/pokemon/"
         url = f"{base_url}{pokemonId}"      
@@ -41,6 +32,7 @@ class Pokemon:
             return None
         return pokemon_data
 
+    # Formatear peso del Poke
     def formatWeight(self,value: int):
         value = str(value)
         
@@ -55,6 +47,7 @@ class Pokemon:
         
         return formatedData
 
+    # Formatear estatura del Poke
     def formatHeight(self,value: int):
         value = str(value)
 
