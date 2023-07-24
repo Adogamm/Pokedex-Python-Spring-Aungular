@@ -17,12 +17,17 @@ class Pokemon:
             
             peso = self.formatWeight(data["weight"])
             altura = self.formatHeight(data["height"])
+            image = data["sprites"]
+            image1 = image["other"]
+            image2 = image1["official-artwork"]
+            image_final = image2["front_default"]
 
             pokemon_data = {
                 "Id" : data["id"],
                 "Nombre" : data["name"].capitalize(),
                 "Peso" : peso+" kgs",
-                "Estatura" : altura+" mts"
+                "Estatura" : altura+" mts",
+                "Imagen": image_final
             }
         except requests.exceptions.RequestException as e:
             print(f"Error al obtener el nombre del Pokémon: {e}")

@@ -2,6 +2,8 @@ package com.pokeapi.pokemon;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @SpringBootApplication
 public class PokemonApplication {
@@ -10,4 +12,11 @@ public class PokemonApplication {
 		SpringApplication.run(PokemonApplication.class, args);
 	}
 
+	@Bean
+	public InternalResourceViewResolver viewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setPrefix("/WEB-INF/views/");
+		resolver.setSuffix(".html");
+		return resolver;
+	}
 }
