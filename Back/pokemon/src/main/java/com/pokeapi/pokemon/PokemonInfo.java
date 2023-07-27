@@ -26,4 +26,15 @@ public class PokemonInfo {
         this.Estatura = Estatura;
         this.Imagen = Imagen;
     }
+
+    @Override
+    public String toString() {
+        return "PokemonInfo{" +
+                "Id=" + Id +
+                ", Nombre='" + Nombre + '\'' +
+                ", Peso='" + Peso + '\'' +
+                ", Estatura='" + Estatura + '\'' +
+                ", Imagen='" + Imagen + '\'' +
+                '}';
+    }
 }

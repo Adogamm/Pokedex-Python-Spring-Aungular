@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 
 @Controller
 public class PokemonController {
@@ -22,22 +24,22 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    /*@GetMapping(value = "/pokemon/{pokemonId}", produces = "application/json")
-    public ResponseEntity<?> getPokemonInfo(@PathVariable int pokemonId) {
-        PokemonInfo pokemonInfo = pokemonService.getPokemonInfo(pokemonId);
-        log.info(">>>>> Obteniendo los datos del Pokemon "+pokemonId);
-        if (pokemonInfo !=  null) {
-            log.info("El pokemon es: "+pokemonInfo.getNombre());
-            return ResponseEntity.ok(pokemonInfo);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }*/
-
     @GetMapping(value = "/pokemon", produces = "application/json")
     public String getPokemon(@RequestParam(name = "pokemonId", required = true) int pokemonId, Model model) {
         PokemonInfo pokemonInfo = pokemonService.getPokemonInfo(pokemonId);
         model.addAttribute("pokemonInfo",pokemonInfo);
         return "pokemon";
+    }
+
+    @GetMapping(value = "/pokedex", produces = "application/json")
+    public String getPokedex(@RequestParam(name = "offset", defaultValue = "0") int offset,
+                             @RequestParam(name = "limit", defaultValue = "12") int limit,
+                             Model model) {
+        offset = Math.max(offset, 0);
+        List<PokemonInfo> pokemonInfoList = pokemonService.getPokemonInfoList(offset, limit);
+        model.addAttribute("pokemonInfoList", pokemonInfoList);
+        model.addAttribute("offset", offset);
+        model.addAttribute("limit", limit);
+        return "pokedex";
     }
 }

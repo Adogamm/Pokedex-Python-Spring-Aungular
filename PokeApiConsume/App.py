@@ -13,6 +13,15 @@ def get_pokemon(pokemon_id):
         return jsonify(pokemon_info)
     else:
         return jsonify({"message": "No se encontró el Pokémon"}), 404
+    
+@app.route("/PokemonList/<int:offset>/<int:limit>", methods = ["GET"])
+def get_pokemon_list(offset,limit):
+    pokedex = Pokedex()
+    pokemon_list = pokedex.getPokedexList(offset,limit)
+    if pokemon_list is not None:
+        return jsonify(pokemon_list)
+    else:
+        return jsonify({"message": "Limite alcanzado"}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
