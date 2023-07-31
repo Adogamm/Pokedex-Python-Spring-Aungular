@@ -23,13 +23,14 @@ class Pokemon:
             image2 = image1["official-artwork"]
             image_final = image2["front_default"]
             types_raw = data["types"]
+            types = [type_data["type"]["name"].capitalize() for type_data in types_raw]
 
             pokemon_data = {
                 "Id" : data["id"],
                 "Nombre" : data["name"].capitalize(),
                 "Peso" : peso+" kgs",
                 "Estatura" : altura+" mts",
-                "Tipo(s)":types_raw,
+                "Tipo(s)":types,
                 "Imagen": image_final
             }
         except requests.exceptions.RequestException as e:
