@@ -24,13 +24,19 @@ public class PokemonController {
         this.pokemonService = pokemonService;
     }
 
-    @GetMapping(value = "/pokemon", produces = "application/json")
-    public String getPokemon(@RequestParam(name = "pokemonId", required = true) int pokemonId, Model model) {
-        PokemonInfo pokemonInfo = pokemonService.getPokemonInfo(pokemonId);
-        model.addAttribute("pokemonInfo",pokemonInfo);
-        return "pokemon";
+    @GetMapping(value = "/", produces = "application/json")
+    public String redirectToPokedex() {
+        return "redirect:/pokedex";
     }
 
+
+    @GetMapping(value = "/pokemon/{pokemonId}", produces = "application/json")
+    public String getPokemon(@PathVariable(name = "pokemonId") int pokemonId, Model model) {
+        PokemonInfo pokemonInfo = pokemonService.getPokemonInfo(pokemonId);
+        model.addAttribute("pokemonInfo", pokemonInfo);
+        log.info(">>>>>>>> " + pokemonInfo);
+        return "pokemon";
+    }
     @GetMapping(value = "/pokedex", produces = "application/json")
     public String getPokedex(@RequestParam(name = "offset", defaultValue = "0") int offset,
                              @RequestParam(name = "limit", defaultValue = "12") int limit,
