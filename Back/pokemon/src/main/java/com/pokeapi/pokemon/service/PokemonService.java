@@ -4,6 +4,7 @@ package com.pokeapi.pokemon.service;
 import com.pokeapi.pokemon.PokemonInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,10 +37,9 @@ public class PokemonService {
 
     public List<PokemonInfo> getPokemonInfoList(int offset, int limit) {
         String url = POKEDEX_API + "/PokemonList/" + offset + "/" + limit;
-        ResponseEntity<PokemonInfo[]> responseEntity = restTemplate.exchange(url,
-                HttpMethod.GET, null, PokemonInfo[].class);
-        PokemonInfo[] pokemonInfoArray = responseEntity.getBody();
-        return Arrays.asList(pokemonInfoArray);
+        ResponseEntity<List<PokemonInfo>> responseEntity = restTemplate.exchange(url,
+                HttpMethod.GET, null, new ParameterizedTypeReference<List<PokemonInfo>>() {});
+        return responseEntity.getBody();
     }
 
 }

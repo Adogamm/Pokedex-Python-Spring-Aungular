@@ -23,6 +23,7 @@
                     </div>
                     <div class="card-body">
                         <img th:src="${pokemon.imagen}" alt="${pokemon.nombre}" class="d-block mx-auto" height="150px" width="auto">
+                        <a th:href="@{/pokemon/{pokemonId}(pokemonId=${pokemon.id})}" class="text-center btn btn-danger btn-sm d-block mx-auto">Información</a>
                     </div>
                 </div>
             </div>

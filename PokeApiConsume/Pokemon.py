@@ -30,7 +30,7 @@ class Pokemon:
                 "Nombre" : data["name"].capitalize(),
                 "Peso" : peso+" kgs",
                 "Estatura" : altura+" mts",
-                "Tipo(s)":types,
+                "Tipo(s)":types_raw,
                 "Imagen": image_final
             }
         except requests.exceptions.RequestException as e:
